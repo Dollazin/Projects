@@ -114,7 +114,6 @@
 
             let dollarUSLocale = Intl.NumberFormat('en-US');  
             let Mat_Total = ((rDataString("ipt_sujo") / 100) * 65);
-            let Mat_Limpo = ((rDataString("ipt_limpo") / 100) * 35);
             document.getElementById("valor_total").innerHTML = "R$"+dollarUSLocale.format(Mat_Total);
 
             //FORMATAR COR
