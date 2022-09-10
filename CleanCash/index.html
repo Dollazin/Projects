@@ -95,13 +95,6 @@
                 <p id="valor_total">Valor Total</p>
             </div>
 
-            <div class="box">
-                <h3>Simulação</h3>
-                <span>Dinheiro Limpo</span>
-                <input type="number" placeholder="0"  id="ipt_limpo" min="0">
-                <p id="valor_limpo">Valor limpo</p>
-            </div>
-
         </div>
         
     </div>
@@ -123,13 +116,9 @@
             let Mat_Total = ((rDataString("ipt_sujo") / 100) * 65);
             let Mat_Limpo = ((rDataString("ipt_limpo") / 100) * 35);
             document.getElementById("valor_total").innerHTML = "R$"+dollarUSLocale.format(Mat_Total);
-            document.getElementById("valor_limpo").innerHTML = parseInt(document.getElementById("ipt_limpo").value) + Mat_Limpo;
-
-            if (rDataString("ipt_limpo") > 0) {document.getElementById("valor_limpo").innerHTML = "R$"+dollarUSLocale.format(parseInt(document.getElementById("ipt_limpo").value) + Mat_Limpo); }
-            else {document.getElementById("valor_limpo").innerHTML = "R$0"; }
 
             //FORMATAR COR
-            let array_2 = [ "ipt_sujo", "ipt_limpo" ];
+            let array_2 = [ "ipt_sujo" ];
             for (let index = 0; index < array_2.length; index++) {
                 if (rDataString(array_2[index]) != 0) { document.getElementById(array_2[index]).style.color = "blue"; }
                 else { document.getElementById(array_2[index]).style.color = "grey"; }
