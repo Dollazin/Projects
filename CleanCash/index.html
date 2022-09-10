@@ -3,8 +3,8 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    <link rel = "icon" href = "https://www.prntr.com/images/money-clipart-1.png" type = "image/x-icon">
-    <title>Clean Cash Calc</title>
+    <link rel = "icon" href = "https://cdn.discordapp.com/attachments/975511589631443055/975513709151678504/unknown.png" type = "image/x-icon">
+    <title>Delivery SushiX</title>
 
     <style>
     
@@ -95,6 +95,13 @@
                 <p id="valor_total">Valor Total</p>
             </div>
 
+            <div class="box">
+                <h3>Simulação</h3>
+                <span>Dinheiro Limpo</span>
+                <input type="number" placeholder="0"  id="ipt_limpo" min="0">
+                <p id="valor_limpo">Valor limpo</p>
+            </div>
+
         </div>
         
     </div>
@@ -114,10 +121,14 @@
 
             let dollarUSLocale = Intl.NumberFormat('en-US');  
             let Mat_Total = ((rDataString("ipt_sujo") / 100) * 65);
+            let Mat_Limpo = ((rDataString("ipt_limpo") / 100) * 65);
             document.getElementById("valor_total").innerHTML = "R$"+dollarUSLocale.format(Mat_Total);
 
+            if (rDataString("ipt_limpo") > 0) {document.getElementById("valor_limpo").innerHTML = "R$"+dollarUSLocale.format(parseInt(document.getElementById("ipt_limpo").value) * 1.53847); }
+            else {document.getElementById("valor_limpo").innerHTML = "R$0"; }
+
             //FORMATAR COR
-            let array_2 = [ "ipt_sujo" ];
+            let array_2 = [ "ipt_sujo", "ipt_limpo" ];
             for (let index = 0; index < array_2.length; index++) {
                 if (rDataString(array_2[index]) != 0) { document.getElementById(array_2[index]).style.color = "blue"; }
                 else { document.getElementById(array_2[index]).style.color = "grey"; }
