@@ -3,8 +3,9 @@
 <head>
     <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    <link rel = "icon" href = "https://cdn.discordapp.com/attachments/975511589631443055/975513709151678504/unknown.png" type = "image/x-icon">
-    <title>Delivery SushiX</title>
+    <link rel = "icon" href = "https://cdn-0.imagensemoldes.com.br/wp-content/uploads/2020/04/Ilustra%C3%A7%C3%A3o-Dinheiro-PNG-1024x757.png" type = "image/x-icon">
+    <script src="https://kit.fontawesome.com/4d4b6d69f1.js" crossorigin="anonymous"></script>
+    <title>Cash Calculator</title>
 
     <style>
     
@@ -20,7 +21,7 @@
         }
 
         body {
-            background-color: rgba(0, 0, 0, 0.5);
+            background-color: rgba(0, 0, 0, 0.75);
         }
 
         .container {
@@ -35,7 +36,7 @@
         .box {
             display: flex;
             flex-direction: column;
-            background-color: rgb(0, 0, 0, 0.5);
+            background-color: rgb(0, 0, 0, 0.4);
             padding: 15px 50px 15px 50px;
             border-radius: 25px;
             margin: 100px;
@@ -58,10 +59,11 @@
         .box #valor_total, #valor_limpo {
            margin-top: 50px;
            font-size: 1.7em;
-           box-shadow: cyan 1px 1px 50px;
+           box-shadow: cyan 1px 1px 30px;
            border-radius: 100px;
            color: white;
            font-family: 'Edu VIC WA NT Beginner', cursive;
+           border: solid cyan 2px;
         }
         
         .box span {
@@ -79,6 +81,54 @@
             text-align: end;
         }
 
+        #optPorc {
+            display: flex;
+            position: absolute;
+            width: 300px;
+            top: 20%;
+            text-align: center;
+            box-shadow: cyan 0px 0px 30px;
+            border: solid cyan 2px;
+            color: white;
+            background-color: transparent;
+            border-radius: 10px;
+        }
+
+        option {
+            background-color: rgb(0, 0, 0, 0.7);
+        }
+
+        .creator {
+            position: absolute;
+            bottom: 1%;
+            right: 1%;
+            color: white;
+            text-shadow: black 1px 1px 3px;
+            background: rgb(0, 0, 0, 0.4);
+            display: flex;
+            flex-direction: row;
+            align-items: center;
+            padding: 3px 10px;
+            border-radius: 15px;
+            box-shadow: blue 0px 0px 10px;
+            letter-spacing: 2px;
+        }
+
+        .creator h1 {
+            font-size: 1.5em;
+        }
+
+        .creator:hover {
+            transition: 500ms;
+            box-shadow: white 0px 0px 15px;
+        }
+
+        .creator .fa-discord {
+            margin-left: 10px;
+            font-size: 1.1em;
+        }
+        
+
     </style>
 </head>
 
@@ -87,6 +137,20 @@
     <div class="divValor">
 
         <div class="container">
+
+            <div class="creator">
+                <h1 class="byDolla">Dolla#0208</h1>
+                <i class="fa-brands fa-discord fa-beat"></i>
+            </div>
+
+            <select id="optPorc">
+                <option value="1">20%</option>
+                <option value="2">25%</option>
+                <option selected value="3">30%</option>
+                <option value="4">35%</option>
+                <option value="5">40%</option>
+                <option value="6">45%</option>
+            </select>
 
             <div class="box">
                 <h3>Lavagem</h3>
@@ -119,12 +183,14 @@
 
         function ScriptUpdate() {
 
+            var try_1 = [ 20, 25, 30, 35, 40, 45];
+            var try_2 = [ 1.25, 1.3334, 1.4287, 1.53847, 1.6667, 1.8182];
+
             let dollarUSLocale = Intl.NumberFormat('en-US');  
-            let Mat_Total = ((rDataString("ipt_sujo") / 100) * 65);
-            let Mat_Limpo = ((rDataString("ipt_limpo") / 100) * 65);
+            let Mat_Total = ((rDataString("ipt_sujo") / 100) * (100 - try_1[rDataString("optPorc") - 1]));
             document.getElementById("valor_total").innerHTML = "R$"+dollarUSLocale.format(Mat_Total);
 
-            if (rDataString("ipt_limpo") > 0) {document.getElementById("valor_limpo").innerHTML = "R$"+dollarUSLocale.format(parseInt(document.getElementById("ipt_limpo").value) * 1.53847); }
+            if (rDataString("ipt_limpo") > 0) {document.getElementById("valor_limpo").innerHTML = "R$"+dollarUSLocale.format(parseInt(document.getElementById("ipt_limpo").value) * try_2[rDataString("optPorc") - 1]); }
             else {document.getElementById("valor_limpo").innerHTML = "R$0"; }
 
             //FORMATAR COR
