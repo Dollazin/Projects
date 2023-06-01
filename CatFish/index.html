@@ -139,6 +139,9 @@
 
                 <span>Combo De Pudim</span>
                 <input type="number" placeholder="0"  id="ipt_pudin" min="0">
+                
+                <span>Energetico</span>
+                <input type="number" placeholder="0"  id="ipt_energas" min="0">
         
                 <span>Bebida Extra</span>
                 <input type="number" placeholder="0"  id="ipt_bebida" min="0">
@@ -176,12 +179,13 @@
             (rDataString("ipt_pudin") * array_1[2]) + 
             (rDataString("ipt_bebida") * array_1[3]) + 
             (rDataString("ipt_comida") * array_1[4]) + 
-            (rDataString("ipt_purin") * array_1[5]);
+            (rDataString("ipt_purin") * array_1[5]) + 
+            (rDataString("ipt_energas") * array_1[6]);
            
             var valor_final = "R$"+dollarUSLocale.format(Mat_Total);
             document.getElementById("final_value").innerHTML = valor_final;
 
-            let array_2 = [ "ipt_combo", "ipt_parceria", "ipt_pudin", "ipt_bebida", "ipt_comida", "ipt_purin" ];
+            let array_2 = [ "ipt_combo", "ipt_parceria", "ipt_pudin", "ipt_bebida", "ipt_comida", "ipt_purin", "ipt_energas" ];
             for (let index = 0; index < array_2.length; index++) {
                 if (rDataString(array_2[index]) != 0) { document.getElementById(array_2[index]).style.color = "red"; }
                 else { document.getElementById(array_2[index]).style.color = "grey"; }
