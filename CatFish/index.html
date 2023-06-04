@@ -183,7 +183,9 @@
             (rDataString("ipt_energas") * array_1[6]);
            
             var valor_final = "R$"+dollarUSLocale.format(Mat_Total);
-            document.getElementById("final_value").innerHTML = valor_final;
+            var valor_metade = "R$"+dollarUSLocale.format(Mat_Total / 2);
+            
+            document.getElementById("final_value").innerHTML = valor_final + " || " + valor_metade;
 
             let array_2 = [ "ipt_combo", "ipt_parceria", "ipt_pudin", "ipt_bebida", "ipt_comida", "ipt_purin", "ipt_energas" ];
             for (let index = 0; index < array_2.length; index++) {
