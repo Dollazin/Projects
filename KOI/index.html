@@ -141,8 +141,11 @@
                 <span>Combo De Pudim</span>
                 <input type="number" placeholder="0"  id="ipt_pudin" min="0">
                 
-                <span>Energetico</span>
+                <span>Energetico (R$1000)</span>
                 <input type="number" placeholder="0"  id="ipt_energas" min="0">
+                
+                <span>Energetico Parceria (R$900)</span>
+                <input type="number" placeholder="0"  id="ipt_energasprc" min="0">
         
                 <span>Bebida Extra</span>
                 <input type="number" placeholder="0"  id="ipt_bebida" min="0">
@@ -172,7 +175,7 @@
 
         function ScriptUpdate() {
             let dollarUSLocale = Intl.NumberFormat('en-US');
-            let array_1 = [1000, 900, 700, 450, 800, 600, 1000];
+            let array_1 = [1000, 900, 700, 450, 800, 600, 1000, 900];
 
             let Mat_Total = 
             (rDataString("ipt_combo") * array_1[0]) + 
@@ -181,14 +184,15 @@
             (rDataString("ipt_bebida") * array_1[3]) + 
             (rDataString("ipt_comida") * array_1[4]) + 
             (rDataString("ipt_purin") * array_1[5]) + 
-            (rDataString("ipt_energas") * array_1[6]);
+            (rDataString("ipt_energas") * array_1[6]) + 
+            (rDataString("ipt_energasprc") * array_1[7]);
            
             var valor_final = "R$"+dollarUSLocale.format(Mat_Total);
             var valor_metade = "R$"+dollarUSLocale.format(Mat_Total / 2);
             
             document.getElementById("final_value").innerHTML = valor_final + " || " + valor_metade;
 
-            let array_2 = [ "ipt_combo", "ipt_temaki", "ipt_pudin", "ipt_bebida", "ipt_comida", "ipt_purin", "ipt_energas" ];
+            let array_2 = [ "ipt_combo", "ipt_temaki", "ipt_pudin", "ipt_bebida", "ipt_comida", "ipt_purin", "ipt_energas", "ipt_energasprc" ];
             for (let index = 0; index < array_2.length; index++) {
                 if (rDataString(array_2[index]) != 0) { document.getElementById(array_2[index]).style.color = "red"; }
                 else { document.getElementById(array_2[index]).style.color = "grey"; }
