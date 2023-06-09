@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KOI</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel = "icon" href = "https://cdn.discordapp.com/attachments/968689133100879932/1111794197826125854/KOI.png" type = "image/x-icon">
+</head>
+<body onload="script();">
+
+    <div id="container_titulo">
+
+        <div id="caixa">
+            <p id="titulo_top">COMBOS</p>
+
+            <div id="row_">
+                <p>Sushi</p>
+                <input type="number" id="combo_sushi" placeholder="0" value="0" min="0">
+            </div>
+
+            <div id="row_">
+                <p>Pudim</p>
+                <input type="number" id="combo_pudim" placeholder="0" value="0" min="0">
+            </div>
+
+            <div id="row_">
+                <p>Temaki</p>
+                <input type="number" id="combo_temaki" placeholder="0" value="0" min="0">
+            </div>
+
+        </div>
+
+        <div id="caixa">
+            <p id="titulo_top">ENERGETICOS</p>
+
+            <div id="row_">
+                <p>Normal R$1000</p>
+                <input type="number" id="energas_1000" placeholder="0" value="0" min="0">
+            </div>
+
+            <div id="row_">
+                <p>Parceria R$900</p>
+                <input type="number" id="energas_900" placeholder="0" value="0" min="0">
+            </div>
+
+        </div>
+
+        <div id="caixa">
+            <p id="titulo_top">EXTRAS</p>
+
+            <div id="row_">
+                <p>Sushi</p>
+                <input type="number" id="extra_sushi" placeholder="0" value="0" min="0">
+            </div>
+
+            <div id="row_">
+                <p>Água</p>
+                <input type="number" id="extra_agua" placeholder="0" value="0" min="0">
+            </div>
+
+            <div id="row_">
+                <p>Pudim</p>
+                <input type="number" id="extra_pudim" placeholder="0" value="0" min="0">
+            </div>
+
+            <div id="row_">
+                <p>Temaki</p>
+                <input type="number" id="extra_temaki" placeholder="0" value="0" min="0">
+            </div>
+
+        </div>
+
+    </div>
+    
+    <h1 id="preco_final">TOTAL</h1>
+    <h1 id="preco_metade">METADE</h1>
+
+    <script src="script.js"></script>
+</body>
+</html>
