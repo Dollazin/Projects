@@ -9,7 +9,34 @@ input,select {border:0; outline:0;}
 input:focus {outline:none!important;}
 
 body {
-    background-color: rgba(0, 0, 0, 0.7);
+    background: linear-gradient(270deg, rgba(0,0,0,1), rgba(0,0,0,0.8), rgba(0,0,0,7));
+    background-size: 600% 600%;
+
+    -webkit-animation: back 10s ease infinite;
+    -moz-animation: back 10s ease infinite;
+    -o-animation: back 10s ease infinite;
+    animation: back 10s ease infinite;
+}
+
+@-webkit-keyframes back {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes back {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-o-keyframes back {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes back {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }
 
 #container_titulo {
@@ -21,7 +48,7 @@ body {
 
 #caixa {
     border-radius: 5px;
-    width: 300px;
+    width: 400px;
 }
 
 #titulo_top {
@@ -30,7 +57,7 @@ body {
     text-decoration: underline;
     padding: 10px;
     margin-bottom: 10px;
-    text-shadow: blue 0px 0px 15px;
+    text-shadow: grey 0px 0px 15px;
     font-size: 40px;
 }
 
@@ -50,26 +77,81 @@ body {
 
 input {
     color: black;
-    text-align: end;
+    text-align: center;
     height: 30px;
     text-decoration: none;
     border-style: none;
     border-radius: 5px;
     cursor: pointer;
     font-size: 1.25em;
+    width: 50px;
+}
+
+img {
+    width: 30px;
+    height: 30px;
+}
+
+#cashFinal {
+    margin-top: 200px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+#boxCash {
+    display: flex;
+    flex-direction: column;
+}
+
+#preco_final, #preco_metade {
+    color: white;
+}
+
+button {
+    background-color: transparent;
+    border: none;
+}
+
+button:hover{
+    opacity: 70%;
+}
+
+#inputInc {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
     width: 150px;
 }
 
-#preco_final {
+#creditos {
+    display: flex;
     color: white;
-    width: 100%;
-    text-align: center;
-    margin-top: 200px;
+    width: 150px;
+    border-radius: 10px;
+    align-items: center;
+    background: linear-gradient(90deg, #000000, #0051ff, #00e1ff);
+    background-size: 600% 600%;
+    -webkit-animation: dolla 4s ease infinite;
+    -moz-animation: dolla 4s ease infinite;
+    animation: dolla 4s ease infinite;
+    justify-content: space-around;
+    position: absolute;
+    right: 25px;
+    bottom: 25px;
 }
 
-#preco_metade {
-    color: white;
-    width: 100%;
-    text-align: center;
-    margin-top: 25px;
+@-webkit-keyframes dolla {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes dolla {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes dolla {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
 }
