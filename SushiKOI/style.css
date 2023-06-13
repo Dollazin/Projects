@@ -9,7 +9,7 @@ input,select {border:0; outline:0;}
 input:focus {outline:none!important;}
 
 body {
-    background-color: rgba(0,0,0.0.8);
+    background-color: rgba(0,0,0,0.8);
 }
 
 #container_titulo {
