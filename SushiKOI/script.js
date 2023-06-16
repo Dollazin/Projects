@@ -34,6 +34,16 @@ $(() => {
             setValueFinal(); SetInpColor(); localStorage.setItem(anyString4, rDataString(OptNames[index]));
         });
     }
+
+    //BOTAO RESET
+    document.getElementById("resetAll").addEventListener("click", ()=> {
+        if (confirm("Deseja Resetar Todas Opcões?")){
+            for (let index = 0; index < OptNames.length; index++) {
+                document.getElementById(OptNames[index]).value = 0;
+                setValueFinal(); SetInpColor(); localStorage.setItem(OptNames[index], 0);
+            }
+        }     
+    });
 });
 
 function rDataString(value){
