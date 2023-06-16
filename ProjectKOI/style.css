@@ -155,3 +155,47 @@ button:hover{
     50%{background-position:100% 50%}
     100%{background-position:0% 50%}
 }
+
+#resetAll {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+    width: 150px;
+    height: 40px;
+    position: absolute;
+    left: 25px;
+    bottom: 25px;
+    background: linear-gradient(90deg, #ff0000, #ff5e00);
+    background-size: 400% 400%;
+    -webkit-animation: reset 4s ease infinite;
+    -moz-animation: reset 4s ease infinite;
+    -o-animation: reset 4s ease infinite;
+    animation: reset 4s ease infinite;
+}
+
+@-webkit-keyframes reset {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-moz-keyframes reset {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@-o-keyframes reset {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+@keyframes reset {
+    0%{background-position:0% 50%}
+    50%{background-position:100% 50%}
+    100%{background-position:0% 50%}
+}
+
+#resetAll h1 {
+    color: white;
+    text-shadow: black 0px 0px 5px; 
+}
