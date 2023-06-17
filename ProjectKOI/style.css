@@ -199,3 +199,45 @@ button:hover{
     color: white;
     text-shadow: black 0px 0px 5px; 
 }
+
+#txtCopy {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+    width: 150px;
+    height: 40px;
+    position: absolute;
+    left: 25px;
+    bottom: 75px;
+    background-color: rgba(0,0,0,0.7);
+    color: white;
+    text-shadow: black 0px 0px 5px; 
+    background: linear-gradient(180deg, #00ff0d, #8d00ff);
+    background-size: 400% 400%;
+    -webkit-animation: copiar 4s ease infinite;
+    -moz-animation: copiar 4s ease infinite;
+    -o-animation: copiar 4s ease infinite;
+    animation: copiar 4s ease infinite;
+}
+
+@-webkit-keyframes copiar {
+    0%{background-position:51% 0%}
+    50%{background-position:50% 100%}
+    100%{background-position:51% 0%}
+}
+@-moz-keyframes copiar {
+    0%{background-position:51% 0%}
+    50%{background-position:50% 100%}
+    100%{background-position:51% 0%}
+}
+@-o-keyframes copiar {
+    0%{background-position:51% 0%}
+    50%{background-position:50% 100%}
+    100%{background-position:51% 0%}
+}
+@keyframes copiar {
+    0%{background-position:51% 0%}
+    50%{background-position:50% 100%}
+    100%{background-position:51% 0%}
+}
