@@ -126,3 +126,18 @@ button:hover{
     color: white;
     text-shadow: black 0px 0px 5px; 
 }
+
+#txtCopy {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    border-radius: 10px;
+    width: 150px;
+    height: 40px;
+    position: absolute;
+    left: 25px;
+    bottom: 75px;
+    color: white;
+    text-shadow: black 0px 0px 5px; 
+    background-color: green;
+}
