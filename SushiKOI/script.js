@@ -26,14 +26,14 @@ $(() => {
         document.getElementById(`${OptNames[index]}_rem`).addEventListener("click", ()=> {
             if (rDataString(`${OptNames[index]}_rem`.substring(0, `${OptNames[index]}_rem`.length - 4)) > 0){
                 document.getElementById(`${OptNames[index]}_rem`.substring(0, `${OptNames[index]}_rem`.length - 4)).value = (parseInt(rDataString(`${OptNames[index]}_rem`.substring(0, `${OptNames[index]}_rem`.length - 4))) - 1);
-                console.log(`${OptNames[index]}_rem`); setValueFinal(); SetInpColor(); localStorage.setItem(`${OptNames[index]}_rem`.substring(0, `${OptNames[index]}_rem`.length - 4), rDataString(OptNames[index]));
+                setValueFinal(); SetInpColor(); localStorage.setItem(`${OptNames[index]}_rem`.substring(0, `${OptNames[index]}_rem`.length - 4), rDataString(OptNames[index]));
             }
         });
         
         //ADD v2
         document.getElementById(`${OptNames[index]}_add`).addEventListener("click", ()=> {
             document.getElementById(`${OptNames[index]}_add`.substring(0, `${OptNames[index]}_add`.length - 4)).value = parseInt(rDataString(`${OptNames[index]}_add`.substring(0, `${OptNames[index]}_add`.length - 4))) + 1;
-            console.log(`${OptNames[index]}_add`); setValueFinal(); SetInpColor(); localStorage.setItem(`${OptNames[index]}_add`.substring(0, `${OptNames[index]}_add`.length - 4), rDataString(OptNames[index]));
+            setValueFinal(); SetInpColor(); localStorage.setItem(`${OptNames[index]}_add`.substring(0, `${OptNames[index]}_add`.length - 4), rDataString(OptNames[index]));
         });
     }
 
