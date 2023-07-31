@@ -1,9 +1,18 @@
-let OptNames = [ "combo_sushi", "combo_pudim", "combo_temaki", "energas_1000", "energas_900", "extra_sushi", "extra_pudim", "extra_temaki", "extra_agua" ];
-let OptPrices = [ 1000, 700, 900, 1000, 900, 800, 600, 700, 450];
-let BtnNamesRem = [ "combo_sushi_rem", "combo_pudim_rem", "combo_temaki_rem", "energas_1000_rem", "energas_900_rem", "extra_sushi_rem", "extra_pudim_rem", "extra_temaki_rem", "extra_agua_rem" ];
-let BtnNamesAdd = [ "combo_sushi_add", "combo_pudim_add", "combo_temaki_add", "energas_1000_add", "energas_900_add", "extra_sushi_add", "extra_pudim_add", "extra_temaki_add", "extra_agua_add" ];
+let OptNames = [ "combo_sushi", "combo_pudim", "combo_temaki", "energas_1000", "energas_900", "extra_sushi", "extra_pudim", "extra_temaki", "extra_agua", "combo_parceria" ];
 let dollarUSLocale = Intl.NumberFormat('en-US');
 
+const AIOV = {
+    [0]: { VALOR: 1000,  NOME: "Combo de Sushi" },
+    [1]: { VALOR: 700,   NOME: "Combo de Pudim" },
+    [2]: { VALOR: 900,   NOME: "Combo de Temaki" },
+    [3]: { VALOR: 1000,  NOME: "Energético 1000" },
+    [4]: { VALOR: 900,   NOME: "Energético 900" },
+    [5]: { VALOR: 800,   NOME: "Sushi Extra" },
+    [6]: { VALOR: 600,   NOME: "Pudim Extra" },
+    [7]: { VALOR: 700,   NOME: "Temaki Extra" },
+    [8]: { VALOR: 450,   NOME: "Água Extra" },
+    [9]: { VALOR: 900,   NOME: "Combo de Parceria" }
+};
 
 $(() => {
 
@@ -12,27 +21,19 @@ $(() => {
         document.getElementById(OptNames[index]).addEventListener("change", ()=> {
            setValueFinal(); SetInpColor(); localStorage.setItem(OptNames[index], rDataString(OptNames[index]));
         });
-    }
 
-    //REM
-    for (let index = 0; index < BtnNamesRem.length; index++) {
-        document.getElementById(BtnNamesRem[index]).addEventListener("click", ()=> {
-            let anyString = BtnNamesRem[index];
-            let anyString4 = anyString.substring(0, anyString.length - 4)
-            if (rDataString(anyString4) > 0){
-                document.getElementById(anyString4).value = (parseInt(rDataString(anyString4)) - 1);
-                setValueFinal(); SetInpColor(); localStorage.setItem(anyString4, rDataString(OptNames[index]));
+        //REM v2
+        document.getElementById(`${OptNames[index]}_rem`).addEventListener("click", ()=> {
+            if (rDataString(`${OptNames[index]}_rem`.substring(0, `${OptNames[index]}_rem`.length - 4)) > 0){
+                document.getElementById(`${OptNames[index]}_rem`.substring(0, `${OptNames[index]}_rem`.length - 4)).value = (parseInt(rDataString(`${OptNames[index]}_rem`.substring(0, `${OptNames[index]}_rem`.length - 4))) - 1);
+                console.log(`${OptNames[index]}_rem`); setValueFinal(); SetInpColor(); localStorage.setItem(`${OptNames[index]}_rem`.substring(0, `${OptNames[index]}_rem`.length - 4), rDataString(OptNames[index]));
             }
         });
-    }
-
-    //ADD
-    for (let index = 0; index < BtnNamesAdd.length; index++) {
-        document.getElementById(BtnNamesAdd[index]).addEventListener("click", ()=> {
-           let anyString = BtnNamesRem[index];
-            let anyString4 = anyString.substring(0, anyString.length - 4)
-            document.getElementById(anyString4).value = (parseInt(rDataString(anyString4)) + 1);
-            setValueFinal(); SetInpColor(); localStorage.setItem(anyString4, rDataString(OptNames[index]));
+        
+        //ADD v2
+        document.getElementById(`${OptNames[index]}_add`).addEventListener("click", ()=> {
+            document.getElementById(`${OptNames[index]}_add`.substring(0, `${OptNames[index]}_add`.length - 4)).value = parseInt(rDataString(`${OptNames[index]}_add`.substring(0, `${OptNames[index]}_add`.length - 4))) + 1;
+            console.log(`${OptNames[index]}_add`); setValueFinal(); SetInpColor(); localStorage.setItem(`${OptNames[index]}_add`.substring(0, `${OptNames[index]}_add`.length - 4), rDataString(OptNames[index]));
         });
     }
 
@@ -49,9 +50,9 @@ $(() => {
     //BOTAO COPIAR
     document.getElementById("txtCopy").addEventListener("click", ()=> {
         let storage = [];
-        for (let index = 0; index < OptNames.length; index++) { storage[index] = rDataString(OptNames[index]) > 0 ? (`${rDataString(OptNames[index])} ${OptNames[index].replace("_", " ")} | `): ""; }
-        let strTxt = storage[0] + storage[1] + storage[2] + storage[3] + storage[4]+ storage[5]+ storage[6]+ storage[7]+ storage[8];
-        let vFinal = (rDataString(OptNames[0]) * OptPrices[0]) + (rDataString(OptNames[1]) * OptPrices[1]) + (rDataString(OptNames[2]) * OptPrices[2]) + (rDataString(OptNames[3]) * OptPrices[3]) + (rDataString(OptNames[4]) * OptPrices[4]) + (rDataString(OptNames[5]) * OptPrices[5]) + (rDataString(OptNames[6]) * OptPrices[6]) + (rDataString(OptNames[7]) * OptPrices[7]) + (rDataString(OptNames[8]) * OptPrices[8]);
+        for (let index = 0; index < OptNames.length; index++) { storage[index] = rDataString(OptNames[index]) > 0 ? (`${rDataString(OptNames[index])} ${AIOV[index].NOME} | `): ""; }
+        let strTxt = storage[0] + storage[1] + storage[2] + storage[3] + storage[4] + storage[5]+ storage[6] + storage[7] + storage[8] + storage[9];
+        let vFinal = (rDataString(OptNames[0]) * AIOV[0].VALOR) + (rDataString(OptNames[1]) * AIOV[1].VALOR) + (rDataString(OptNames[2]) * AIOV[2].VALOR) + (rDataString(OptNames[3]) * AIOV[3].VALOR) + (rDataString(OptNames[4]) * AIOV[4].VALOR) + (rDataString(OptNames[5]) * AIOV[5].VALOR) + (rDataString(OptNames[6]) * AIOV[6].VALOR) + (rDataString(OptNames[7]) * AIOV[7].VALOR) + (rDataString(OptNames[8]) * AIOV[8].VALOR) + (rDataString(OptNames[9]) * AIOV[9].VALOR);
         let vString = (`${strTxt.slice(0, strTxt.length - 3)} // Total: R$${dollarUSLocale.format(vFinal)} || 50%: R$${dollarUSLocale.format((vFinal / 2))}`);
         navigator.clipboard.writeText(vString);
     });
@@ -73,7 +74,7 @@ function script(){
 }
 
 function setValueFinal(){
-    let vFinal = (rDataString(OptNames[0]) * OptPrices[0]) + (rDataString(OptNames[1]) * OptPrices[1]) + (rDataString(OptNames[2]) * OptPrices[2]) + (rDataString(OptNames[3]) * OptPrices[3]) + (rDataString(OptNames[4]) * OptPrices[4]) + (rDataString(OptNames[5]) * OptPrices[5]) + (rDataString(OptNames[6]) * OptPrices[6]) + (rDataString(OptNames[7]) * OptPrices[7]) + (rDataString(OptNames[8]) * OptPrices[8]);
+    let vFinal = (rDataString(OptNames[0]) * AIOV[0].VALOR) + (rDataString(OptNames[1]) * AIOV[1].VALOR) + (rDataString(OptNames[2]) * AIOV[2].VALOR) + (rDataString(OptNames[3]) * AIOV[3].VALOR) + (rDataString(OptNames[4]) * AIOV[4].VALOR) + (rDataString(OptNames[5]) * AIOV[5].VALOR) + (rDataString(OptNames[6]) * AIOV[6].VALOR) + (rDataString(OptNames[7]) * AIOV[7].VALOR) + (rDataString(OptNames[8]) * AIOV[8].VALOR) + (rDataString(OptNames[9]) * AIOV[9].VALOR);
     document.getElementById("preco_final").innerHTML = "TOTAL: R$" + dollarUSLocale.format(vFinal);
     document.getElementById("preco_metade").innerHTML = "METADE: R$" + dollarUSLocale.format((vFinal / 2));
 }
