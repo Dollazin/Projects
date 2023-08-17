@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <title>KOI</title>
+    <script src="https://code.jquery.com/jquery-3.5.0.min.js" integrity="sha256-xNzN2a4ltkB44Mc/Jz3pT4iU1cmeR0FkXs4pru/JxaQ=" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/4d4b6d69f1.js" crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel = "icon" href = "https://cdn.discordapp.com/attachments/968689133100879932/1111794197826125854/KOI.png" type = "image/x-icon">
+</head>
+<body id="fullPage" onload="script();">
+
+    <header>
+        <div id="imgCFG">
+            <button id="btnCFG">
+                <img src="img/config.png" id="cfgIcon">
+            </button>
+        </div>
+
+        <div id="topHeader">
+    
+            <div id="checkBoxCustom">
+                <input type="checkbox" id="chkDark">
+                <p>Modo Escuro</p>
+            </div>
+
+            <div id="checkBoxCustom">
+                <input type="checkbox" id="chkCustom">
+                <p>Custom Color</p>
+            </div>
+
+            <div id="chkCC">
+                <input type="color" name="" id="chkCustomColor">
+            </div>
+        </div>
+    </header>
+    
+    <div id="container_titulo">
+
+        <div id="caixa">
+            <p id="titulo_top">COMBOS</p>
+
+            <div id="row_">
+                <img src="img/sushi.png">
+                <p>Sushi</p>
+                <div id="inputInc">
+                    <button><img src="img/rem.png" id="combo_sushi_rem"></button>
+                    <input type="number" id="combo_sushi" placeholder="0" value="0" min="0">
+                    <button><img src="img/add.png" id="combo_sushi_add"></button>
+                </div>
+            </div>
+
+            <div id="row_">
+                <img src="img/pudim.png">
+                <p>Pudim</p>
+                <div id="inputInc">
+                    <button><img src="img/rem.png" id="combo_pudim_rem"></button>
+                    <input type="number" id="combo_pudim" placeholder="0" value="0" min="0">
+                    <button><img src="img/add.png" id="combo_pudim_add"></button>
+                </div>
+            </div>
+
+            <div id="row_">
+                <img src="img/temaki.png">
+                <p>Temaki</p>
+                <div id="inputInc">
+                    <button><img src="img/rem.png" id="combo_temaki_rem"></button>
+                    <input type="number" id="combo_temaki" placeholder="0" value="0" min="0">
+                    <button><img src="img/add.png" id="combo_temaki_add"></button>
+                </div>
+            </div>
+
+            <div id="row_">
+                <img src="img/parceria.png">
+                <p>Parceria</p>
+                <div id="inputInc">
+                    <button><img src="img/rem.png" id="combo_parceria_rem"></button>
+                    <input type="number" id="combo_parceria" placeholder="0" value="0" min="0">
+                    <button><img src="img/add.png" id="combo_parceria_add"></button>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="caixa">
+            <p id="titulo_top">ENERGÉTICOS</p>
+
+            <div id="row_">
+                <img src="img/energas.png">
+                <p>R$1000</p>
+                <div id="inputInc">
+                    <button><img src="img/rem.png" id="energas_1000_rem"></button>
+                    <input type="number" id="energas_1000" placeholder="0" value="0" min="0">
+                    <button><img src="img/add.png" id="energas_1000_add"></button>
+                </div>
+            </div>
+
+            <div id="row_">
+                <img src="img/energas.png">
+                <p>R$900</p>
+                <div id="inputInc">
+                    <button><img src="img/rem.png" id="energas_900_rem"></button>
+                    <input type="number" id="energas_900" placeholder="0" value="0" min="0">
+                    <button><img src="img/add.png" id="energas_900_add"></button>
+                </div>
+            </div>
+
+        </div>
+
+        <div id="caixa">
+            <p id="titulo_top">EXTRAS</p>
+
+            <div id="row_">
+                <img src="img/sushi.png">
+                <p>Sushi</p>
+                <div id="inputInc">
+                    <button><img src="img/rem.png" id="extra_sushi_rem"></button>
+                    <input type="number" id="extra_sushi" placeholder="0" value="0" min="0">
+                    <button><img src="img/add.png" id="extra_sushi_add"></button>
+                </div>
+            </div>
+
+            <div id="row_">
+                <img src="img/pudim.png">
+                <p>Pudim</p>
+                <div id="inputInc">
+                    <button><img src="img/rem.png" id="extra_pudim_rem"></button>
+                    <input type="number" id="extra_pudim" placeholder="0" value="0" min="0">
+                    <button><img src="img/add.png" id="extra_pudim_add"></button>
+                </div>
+            </div>
+
+            <div id="row_">
+                <img src="img/temaki.png">
+                <p>Temaki</p>
+                <div id="inputInc">
+                    <button><img src="img/rem.png" id="extra_temaki_rem"></button>
+                    <input type="number" id="extra_temaki" placeholder="0" value="0" min="0">
+                    <button><img src="img/add.png" id="extra_temaki_add"></button>
+                </div>
+            </div>
+
+            <div id="row_">
+                <img src="img/agua.png">
+                <p>Água</p>
+                <div id="inputInc">
+                    <button><img src="img/rem.png" id="extra_agua_rem"></button>
+                    <input type="number" id="extra_agua" placeholder="0" value="0" min="0">
+                    <button><img src="img/add.png" id="extra_agua_add"></button>
+                </div>
+            </div>
+
+        </div>
+
+    </div>
+    
+    <main>
+
+        <div id="mainBox">
+
+            <div id="boxCash">
+                <div>
+                    <img src="img/cash.png" class="fa-bounce">
+                    <h1>Total:</h1>
+                </div>    
+                <h1 id="preco_final">100</h1>
+            </div>
+    
+            <div id="boxCash">
+                <div>
+                    <img src="img/cash.png" class="fa-bounce">
+                    <h1>Metade:</h1>
+                </div>
+                <h1 id="preco_metade">METADE</h1>
+            </div>
+
+        </div>
+    </main>
+
+    <footer>
+        <div id="btnClick">
+
+            <button id="resetAll" class="iconHeader">
+                <img src="img/reset.png">
+                <h1>Resetar</h1>
+            </button>
+        
+            <button id="txtCopy" class="iconHeader">
+                <img src="img/copiar.png">
+                <h1>Texto</h1>
+            </button>
+        </div>
+
+        <div id="Creditos">
+            <img src="img/discord.png" class="fa-shake">
+            <h1>.Dolla</h1>
+        </div>
+        
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+</html>
