@@ -147,6 +147,7 @@ button:hover{
 #boxCash h1 {
     color: white;
     margin-left: 10px;
+    text-shadow: black 1px 1px 10px;
 }
 
 .iconHeader {
@@ -167,6 +168,10 @@ button:hover{
     bottom: 0%;
 }
 
+footer h1 {
+    text-shadow: black 1px 1px 10px;
+}
+
 #Creditos {
     position: absolute;
     right: 0%;
@@ -185,4 +190,8 @@ button:hover{
 
 #Creditos:hover, .iconHeader:hover{
     border: 3px double;
+}
+
+#row_ p {
+    text-shadow: black 1px 1px 10px;
 }
