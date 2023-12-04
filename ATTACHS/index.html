@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -12,6 +13,7 @@
       align-items: center;
       margin: 50px 20%;
     }
+
     #total-bar {
       position: fixed;
       top: 0;
@@ -22,22 +24,28 @@
       text-align: center;
       font-size: 20px;
     }
+
     table {
       border-collapse: collapse;
       width: 100%;
       margin-bottom: 20px;
     }
-    th, td {
+
+    th,
+    td {
       border: 1px solid #dee2e6;
       padding: 8px;
       text-align: left;
     }
+
     th {
       background-color: #f8f9fa;
     }
+
     .quantity-input {
       width: 100px;
     }
+
     .icon-column img {
       width: 60px;
       height: 60px;
@@ -45,19 +53,25 @@
       border-radius: 50%;
       margin-right: 4px;
     }
+
     .action-button {
       display: inline-block;
       margin-top: 4px;
     }
+
     .remove-button {
       margin-right: 4px;
     }
+
     .total-price {
       font-weight: bold;
       color: #007bff;
     }
   </style>
+  <!-- Adição da biblioteca Clipboard.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.10/clipboard.min.js"></script>
 </head>
+
 <body>
 
   <div id="total-bar">Valor Total: R$ 0.00</div>
@@ -65,25 +79,28 @@
   <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
-    $(document).ready(function() {
+    $(document).ready(function () {
       // Função para formatar valores como moeda
       function formatCurrency(value) {
-        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+        return new Intl.NumberFormat('en-US', {
+          style: 'currency',
+          currency: 'USD'
+        }).format(Number(value));
       }
 
       // Carregar dados do arquivo de configuração
-      $.getJSON('config.json', function(data) {
+      $.getJSON('config.json', function (data) {
         // Iterar sobre cada tabela no arquivo de configuração
-        $.each(data, function(tabela, itens) {
+        $.each(data, function (tabela, itens) {
           // Criar tabela dinâmica
           var table = $('<table class="table table-bordered table-hover">');
           table.append('<thead class="thead-light"><tr><th>Arma</th><th>Preço</th><th>Quantidade</th><th>Ações</th></tr></thead>');
 
           // Preencher a tabela com os dados
-          $.each(itens, function(index, item) {
+          $.each(itens, function (index, item) {
             // Adicionar uma linha para cada item
             var row = $('<tr>');
-            
+
             // Adicionar coluna de ícone (imagem + nome da arma)
             var imageName = item.arma.toUpperCase().replace(/\s/g, '_') + '.png'; // Converte para maiúsculas e substitui espaços por underscores
             row.append('<td class="icon-column"><img src="img/' + imageName + '" alt="' + item.arma + '"> ' + item.arma + '</td>');
@@ -104,13 +121,13 @@
 
             // Adicionar botões de adição e remoção como texto
             var addAction = $('<button class="btn btn-success btn-sm action-button">Adicionar</button>');
-            addAction.on('click', function() {
+            addAction.on('click', function () {
               quantityInput.val(parseInt(quantityInput.val()) + 1);
               updateTotal(row);
             });
 
             var removeAction = $('<button class="btn btn-danger btn-sm action-button remove-button">Remover</button>');
-            removeAction.on('click', function() {
+            removeAction.on('click', function () {
               var currentQuantity = parseInt(quantityInput.val());
               if (currentQuantity > 0) {
                 quantityInput.val(currentQuantity - 1);
@@ -125,7 +142,7 @@
             table.append(row);
 
             // Adicionar evento para atualizar o total quando o valor do input é alterado
-            quantityInput.on('input', function() {
+            quantityInput.on('input', function () {
               updateTotal(row);
             });
           });
@@ -159,7 +176,7 @@
         var total = 0;
 
         // Iterar sobre todas as entradas de quantidade e somar ao total
-        $('.quantity-input').each(function() {
+        $('.quantity-input').each(function () {
           var quantity = parseInt($(this).val());
           var price = parseFloat($(this).closest('tr').find('.price').data('price'));
 
@@ -169,8 +186,88 @@
         // Exibir o total na barra superior
         $('#total-bar').text('Valor Total: ' + formatCurrency(total));
       }
+
+      // Inicializar o Clipboard.js
+var clipboard = new ClipboardJS('#copyButton', {
+  text: function () {
+    // Função para gerar o texto a ser copiado
+    var categorias = {
+      'Produtos': [],
+      'Valor Total': [],
+      'Transferência': []
+    };
+
+    $('.quantity-input').each(function () {
+      var quantity = parseInt($(this).val());
+      if (quantity > 0) {
+        var categoria = 'Produtos';
+        var arma = $(this).closest('tr').find('.icon-column img').attr('alt');
+        var price = parseFloat($(this).closest('tr').find('.price').data('price'));
+        var total = quantity * price;
+
+        // Adicionar à categoria "Produtos"
+        categorias['Produtos'].push(quantity + 'x ' + arma + ' = ' + formatCurrency(total));
+      }
+    });
+
+    // Calcular o valor total
+    var valorTotal = 0;
+    $('.quantity-input').each(function () {
+      var quantity = parseInt($(this).val());
+      var price = parseFloat($(this).closest('tr').find('.price').data('price'));
+      valorTotal += quantity * price;
+    });
+    categorias['Valor Total'].push(formatCurrency(valorTotal));
+
+    // Adicionar à categoria "Transferência"
+    categorias['Transferência'].push('Pendente');
+
+    // Formatar o resultado
+    var vendaInfo = '';
+    for (var categoria in categorias) {
+      if (categorias.hasOwnProperty(categoria)) {
+        vendaInfo += categoria + ': ' + categorias[categoria].join(' // ') + '\n';
+      }
+    }
+
+    // Adicionar informações sobre família e responsável
+    var familia = $('#familiaInput').val();
+    var responsavel = $('#responsavelInput').val();
+    vendaInfo = 'Família: ' + familia + '\nResponsável: ' + responsavel + '\n' + vendaInfo;
+
+    return vendaInfo;
+  }
+});
+
+// Restante do código permanece inalterado
+
+
+      // Exibir mensagem de sucesso ao copiar
+      clipboard.on('success', function (e) {
+        alert('Venda copiada com sucesso!');
+        e.clearSelection();
+      });
+
+      // Exibir mensagem de erro ao falhar na cópia
+      clipboard.on('error', function (e) {
+        alert('Erro ao copiar venda. Use Ctrl+C para copiar manualmente.');
+      });
     });
   </script>
 
+  <!-- Adição do input fixo para Família e Responsável -->
+  <div style="position: fixed; bottom: 10px; right: 10px; display: flex; flex-direction: column; align-items: flex-end;">
+    <div style="margin-bottom: 10px;">
+      <label for="familiaInput">Família:</label>
+      <input type="text" id="familiaInput" class="form-control" placeholder="Digite a família">
+    </div>
+    <div style="margin-bottom: 10px;">
+      <label for="responsavelInput">Responsável:</label>
+      <input type="text" id="responsavelInput" class="form-control" placeholder="Digite o responsável">
+    </div>
+    <button id="copyButton" class="btn btn-primary">Copiar Venda</button>
+  </div>
+
 </body>
+
 </html>
