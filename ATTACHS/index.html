@@ -36,7 +36,7 @@
       background-color: #f8f9fa;
     }
     .quantity-input {
-      width: 60px;
+      width: 100px;
     }
     .icon-column img {
       width: 60px;
@@ -52,6 +52,10 @@
     .remove-button {
       margin-right: 4px;
     }
+    .total-price {
+      font-weight: bold;
+      color: #007bff;
+    }
   </style>
 </head>
 <body>
@@ -62,6 +66,11 @@
   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
   <script>
     $(document).ready(function() {
+      // Função para formatar valores como moeda
+      function formatCurrency(value) {
+        return new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(value);
+      }
+
       // Carregar dados do arquivo de configuração
       $.getJSON('config.json', function(data) {
         // Iterar sobre cada tabela no arquivo de configuração
@@ -79,14 +88,14 @@
             var imageName = item.arma.toUpperCase().replace(/\s/g, '_') + '.png'; // Converte para maiúsculas e substitui espaços por underscores
             row.append('<td class="icon-column"><img src="img/' + imageName + '" alt="' + item.arma + '"> ' + item.arma + '</td>');
 
-            row.append('<td class="price">R$ ' + item.preco + '</td>');
+            var priceCell = $('<td class="price" data-price="' + item.preco + '">R$ ' + formatCurrency(item.preco) + '<br><span class="total-price">Total: R$ 0.00</span></td>');
+            row.append(priceCell);
 
             // Adicionar input para a quantidade
             var quantityInput = $('<input>', {
               type: 'number',
               value: 0,
               min: 0,
-              max: 10, // Defina o máximo conforme necessário
               class: 'form-control quantity-input'
             });
 
@@ -97,7 +106,7 @@
             var addAction = $('<button class="btn btn-success btn-sm action-button">Adicionar</button>');
             addAction.on('click', function() {
               quantityInput.val(parseInt(quantityInput.val()) + 1);
-              updateTotal();
+              updateTotal(row);
             });
 
             var removeAction = $('<button class="btn btn-danger btn-sm action-button remove-button">Remover</button>');
@@ -105,7 +114,7 @@
               var currentQuantity = parseInt(quantityInput.val());
               if (currentQuantity > 0) {
                 quantityInput.val(currentQuantity - 1);
-                updateTotal();
+                updateTotal(row);
               }
             });
 
@@ -117,7 +126,7 @@
 
             // Adicionar evento para atualizar o total quando o valor do input é alterado
             quantityInput.on('input', function() {
-              updateTotal();
+              updateTotal(row);
             });
           });
 
@@ -128,22 +137,37 @@
       });
 
       // Função para calcular e exibir o valor total
-      function updateTotal() {
+      function updateTotal(row) {
+        var quantityInput = row.find('.quantity-input');
+        var totalCell = row.find('.total-price');
+
+        var quantity = parseInt(quantityInput.val());
+        var price = parseFloat(row.find('.price').data('price'));
+
+        // Calcular o valor total para a linha específica
+        var total = quantity * price;
+
+        // Atualizar o valor total na coluna de preço
+        totalCell.text('Total: ' + formatCurrency(total));
+
+        // Atualizar o valor total geral
+        updateGlobalTotal();
+      }
+
+      // Função para calcular e exibir o valor total geral
+      function updateGlobalTotal() {
         var total = 0;
 
         // Iterar sobre todas as entradas de quantidade e somar ao total
         $('.quantity-input').each(function() {
           var quantity = parseInt($(this).val());
-          var price = parseFloat($(this).closest('tr').find('.price').text().replace('R$ ', '').replace(',', ''));
+          var price = parseFloat($(this).closest('tr').find('.price').data('price'));
 
           total += quantity * price;
         });
 
-        // Formatar o total usando Intl.NumberFormat
-        var formattedTotal = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(total);
-
         // Exibir o total na barra superior
-        $('#total-bar').text('Valor Total: ' + formattedTotal);
+        $('#total-bar').text('Valor Total: ' + formatCurrency(total));
       }
     });
   </script>
