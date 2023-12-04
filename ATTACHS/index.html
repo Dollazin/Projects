@@ -79,7 +79,7 @@
             var imageName = item.arma.toUpperCase().replace(/\s/g, '_') + '.png'; // Converte para maiúsculas e substitui espaços por underscores
             row.append('<td class="icon-column"><img src="img/' + imageName + '" alt="' + item.arma + '"> ' + item.arma + '</td>');
 
-            row.append('<td>R$ ' + item.preco + '</td>');
+            row.append('<td class="price">R$ ' + item.preco + '</td>');
 
             // Adicionar input para a quantidade
             var quantityInput = $('<input>', {
@@ -114,6 +114,11 @@
 
             // Adicionar linha à tabela
             table.append(row);
+
+            // Adicionar evento para atualizar o total quando o valor do input é alterado
+            quantityInput.on('input', function() {
+              updateTotal();
+            });
           });
 
           // Adicionar tabela à página
@@ -129,7 +134,7 @@
         // Iterar sobre todas as entradas de quantidade e somar ao total
         $('.quantity-input').each(function() {
           var quantity = parseInt($(this).val());
-          var price = parseFloat($(this).closest('tr').find('td:eq(1)').text().replace('R$ ', '').replace(',', ''));
+          var price = parseFloat($(this).closest('tr').find('.price').text().replace('R$ ', '').replace(',', ''));
 
           total += quantity * price;
         });
