@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Compra de Armas</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+  <style>
+    body {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      margin: 50px 20%;
+    }
+    #total-bar {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background-color: black;
+      color: white;
+      padding: 10px;
+      text-align: center;
+      font-size: 20px;
+    }
+    table {
+      border-collapse: collapse;
+      width: 100%;
+      margin-bottom: 20px;
+    }
+    th, td {
+      border: 1px solid #dee2e6;
+      padding: 8px;
+      text-align: left;
+    }
+    th {
+      background-color: #f8f9fa;
+    }
+    .quantity-input {
+      width: 60px;
+    }
+    .icon-column img {
+      width: 60px;
+      height: 60px;
+      object-fit: cover;
+      border-radius: 50%;
+      margin-right: 4px;
+    }
+    .action-button {
+      display: inline-block;
+      margin-top: 4px;
+    }
+    .remove-button {
+      margin-right: 4px;
+    }
+  </style>
+</head>
+<body>
+
+  <div id="total-bar">Valor Total: R$ 0.00</div>
+
+  <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+  <script>
+    $(document).ready(function() {
+      // Carregar dados do arquivo de configuração
+      $.getJSON('config.json', function(data) {
+        // Iterar sobre cada tabela no arquivo de configuração
+        $.each(data, function(tabela, itens) {
+          // Criar tabela dinâmica
+          var table = $('<table class="table table-bordered table-hover">');
+          table.append('<thead class="thead-light"><tr><th>Arma</th><th>Preço</th><th>Quantidade</th><th>Ações</th></tr></thead>');
+
+          // Preencher a tabela com os dados
+          $.each(itens, function(index, item) {
+            // Adicionar uma linha para cada item
+            var row = $('<tr>');
+            
+            // Adicionar coluna de ícone (imagem + nome da arma)
+            var imageName = item.arma.replace(/\s/g, '_').toLowerCase() + '.png'; // Substitui espaços por underscores
+            row.append('<td class="icon-column"><img src="img/' + imageName + '" alt="' + item.arma + '"> ' + item.arma + '</td>');
+
+            row.append('<td>R$ ' + item.preco + '</td>');
+
+            // Adicionar input para a quantidade
+            var quantityInput = $('<input>', {
+              type: 'number',
+              value: 0,
+              min: 0,
+              max: 10, // Defina o máximo conforme necessário
+              class: 'form-control quantity-input'
+            });
+
+            // Adicionar coluna de quantidade à linha
+            row.append($('<td>').append(quantityInput));
+
+            // Adicionar botões de adição e remoção como texto
+            var addAction = $('<button class="btn btn-success btn-sm action-button">Adicionar</button>');
+            addAction.on('click', function() {
+              quantityInput.val(parseInt(quantityInput.val()) + 1);
+              updateTotal();
+            });
+
+            var removeAction = $('<button class="btn btn-danger btn-sm action-button remove-button">Remover</button>');
+            removeAction.on('click', function() {
+              var currentQuantity = parseInt(quantityInput.val());
+              if (currentQuantity > 0) {
+                quantityInput.val(currentQuantity - 1);
+                updateTotal();
+              }
+            });
+
+            // Adicionar coluna de ações à linha
+            row.append($('<td>').append(removeAction).append(addAction));
+
+            // Adicionar linha à tabela
+            table.append(row);
+          });
+
+          // Adicionar tabela à página
+          $('body').append('<h2 class="mt-4">' + tabela + '</h2>');
+          $('body').append(table);
+        });
+      });
+
+      // Função para calcular e exibir o valor total
+      function updateTotal() {
+        var total = 0;
+
+        // Iterar sobre todas as entradas de quantidade e somar ao total
+        $('.quantity-input').each(function() {
+          var quantity = parseInt($(this).val());
+          var price = parseFloat($(this).closest('tr').find('td:eq(1)').text().replace('R$ ', '').replace(',', ''));
+
+          total += quantity * price;
+        });
+
+        // Formatar o total usando Intl.NumberFormat
+        var formattedTotal = new Intl.NumberFormat('en-US', { style: 'currency', currency: 'USD' }).format(total);
+
+        // Exibir o total na barra superior
+        $('#total-bar').text('Valor Total: ' + formattedTotal);
+      }
+    });
+  </script>
+
+</body>
+</html>

@@ -1,0 +1,23 @@
+{
+    "Baixo Calibre": [
+      {"arma": "FIVESEVEN", "preco": 13000},
+      {"arma": "HK", "preco": 5000},
+      {"arma": "HKMK2", "preco": 8000},
+      {"arma": "TEC9", "preco": 18000},
+      {"arma": "SCORPION", "preco": 15000},
+      {"arma": "DESERT EAGLE", "preco": 18000}
+    ],
+    "Medio Calibre": [
+      {"arma": "UZI", "preco": 25000},
+      {"arma": "MTAR", "preco": 35000},
+      {"arma": "AK74U", "preco": 55000}
+    ],
+    "Alto Calibre": [
+      {"arma": "AK103", "preco": 43000},
+      {"arma": "G36C", "preco": 50000},
+      {"arma": "AUG", "preco": 68000},
+      {"arma": "G36C MK2", "preco": 85000},
+      {"arma": "AK-47 MK2", "preco": 85000},
+      {"arma": "FAMAS MK2", "preco": 85000}
+    ]
+}
